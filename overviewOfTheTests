@@ -1,0 +1,29 @@
+This test suite covers the functionality of the ServicePetStore class in the petstore application.
+
+testBuy(): 
+   - Verifies the behavior of the buy() method in ServicePetStore.
+   - Mocks user and pet objects and checks if the buy operation behaves correctly.
+testBuyPets():
+   - Tests the buyPets() method in ServicePetStore.
+   - Mocks a list of pets and a user, ensuring that the buy operation for multiple pets behaves as expected.
+testHistoryLog():
+   - Validates the behavior of the historyLog() method in ServicePetStore.
+   - Mocks the BuyHistoryRepository and checks if the method returns the expected list of buy history.
+testCreateUsers():
+   - Tests the createUsers() method in ServicePetStore.
+   - Mocks the UserRepository and verifies if the method correctly creates and returns a list of users.
+testCreatePets():
+   - Validates the createPets() method in ServicePetStore.
+   - Mocks the PetRepository and confirms if the method properly creates and returns a list of pets.
+testListUsers():
+   - Tests the listUsers() method in ServicePetStore.
+   - Mocks the UserRepository and ensures that the method correctly retrieves and returns a list of users.
+testListPets():
+   - Validates the listPets() method in ServicePetStore.
+   - Mocks the PetRepository and verifies if the method accurately retrieves and returns a list of pets.
+
+Dependencies:
+- The tests utilize Mockito for mocking dependencies such as repositories and entities.
+- Annotations like @Mock and @InjectMocks are used for dependency injection and mocking.
+- JUnit5 (JUnit Jupiter) framework is employed for writing and executing the tests.
+
