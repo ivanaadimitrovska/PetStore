@@ -13,39 +13,39 @@ import java.util.List;
 @RequestMapping("/pet")
 public class RestControllerPetStore {
 
-    private final ServicePetStore petService;
+    private final ServicePetStore servicePetStore;
 
-    public RestControllerPetStore(ServicePetStore petService) {
-        this.petService = petService;
+    public RestControllerPetStore(ServicePetStore servicePetStore) {
+        this.servicePetStore = servicePetStore;
     }
 
     @PostMapping("/buy/all")
     public void buyAll(){
-        this.petService.buyPets();
+        this.servicePetStore.buyPets();
     }
 
     @GetMapping("/historyLog")
     public List<BuyHistory> listHistoryLog(){
-        return this.petService.historyLog();
+        return this.servicePetStore.historyLog();
     }
 
     @GetMapping("/list-users")
     public List<Customer> listUsers(){
-        return this.petService.listUsers();
+        return this.servicePetStore.listUsers();
     }
 
     @GetMapping("/list-pets")
     public List<Pet> listPets(){
-        return this.petService.listPets();
+        return this.servicePetStore.listPets();
     }
 
     @PostMapping("/create-users")
     public void createUsers(){
-        this.petService.createUsers();
+        this.servicePetStore.createUsers();
     }
 
     @PostMapping("/create-pets")
     public void createPets(){
-        this.petService.createPets();
+        this.servicePetStore.createPets();
     }
 }

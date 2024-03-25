@@ -6,7 +6,7 @@ import com.example.petstore.model.*;
 import com.example.petstore.repository.BuyHistoryRepository;
 import com.example.petstore.repository.MoneyRepository;
 import com.example.petstore.repository.PetRepository;
-import com.example.petstore.repository.UserRepository;
+import com.example.petstore.repository.CustomerRepository;
 import com.example.petstore.response.BuyResponse;
 import com.example.petstore.service.ServicePetStore;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +27,7 @@ class PetServiceTest {
     private PetRepository petRepository;
 
     @Mock
-    private UserRepository userRepository;
+    private CustomerRepository userRepository;
 
     @Mock
     private BuyHistoryRepository buyHistoryRepository;

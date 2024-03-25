@@ -11,7 +11,7 @@ import com.example.petstore.model.Pet;
 import com.example.petstore.repository.BuyHistoryRepository;
 import com.example.petstore.repository.MoneyRepository;
 import com.example.petstore.repository.PetRepository;
-import com.example.petstore.repository.UserRepository;
+import com.example.petstore.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -23,22 +23,22 @@ import java.util.*;
 public class ServicePetStore {
 
     private final PetRepository petRepository;
-    private final UserRepository userRepository;
+    private final CustomerRepository customerRepository;
     private final BuyHistoryRepository buyHistoryRepository;
     private int totalUsersSuccessfullyBought = 0;
     private int totalUsersNotAllowedToBuy = 0;
     private final MoneyRepository moneyRepository;
 
-    public ServicePetStore(PetRepository petRepository, UserRepository userRepository, BuyHistoryRepository buyHistoryRepository, MoneyRepository moneyRepository) {
+    public ServicePetStore(PetRepository petRepository, CustomerRepository customerRepository, BuyHistoryRepository buyHistoryRepository, MoneyRepository moneyRepository) {
         this.petRepository = petRepository;
-        this.userRepository = userRepository;
+        this.customerRepository = customerRepository;
         this.buyHistoryRepository = buyHistoryRepository;
         this.moneyRepository = moneyRepository;
     }
 
     public BuyResponse buy(String email, Pet pet) {
         BuyResponse response = new BuyResponse();
-        Customer user = this.userRepository.findByEmail(email);
+        Customer user = this.customerRepository.findByEmail(email);
         int usersSuccessfullyBought = 0;
         int usersNotAllowedToBuy = 0;
         Money money;
@@ -47,7 +47,7 @@ public class ServicePetStore {
             money=new Money(user.getBudget().getValue() - pet.getPrice().getValue());
             this.moneyRepository.save(money);
             user.setBudget(money);
-            this.userRepository.save(user);
+            this.customerRepository.save(user);
             this.petRepository.save(pet);
             usersSuccessfullyBought++;
             if(pet.getType() == TypeEnum.CAT) {
@@ -98,9 +98,9 @@ public class ServicePetStore {
             this.moneyRepository.save(budget);
 
             Customer newCustomer = new Customer(firstName, lastName, email, budget);
-            this.userRepository.save(newCustomer);
+            this.customerRepository.save(newCustomer);
         }
-        return this.userRepository.findAll();
+        return this.customerRepository.findAll();
     }
 
     public List<Pet> createPets() {
@@ -135,7 +135,7 @@ public class ServicePetStore {
 
 
     public List<Customer> listUsers() {
-        return this.userRepository.findAll();
+        return this.customerRepository.findAll();
     }
 
 
@@ -147,7 +147,7 @@ public class ServicePetStore {
     public void buyPets(){
         List<Pet> pets = this.petRepository.findAllByOwnerIsNull();
         Pet pet;
-        List<Customer> users = this.userRepository.findAll();
+        List<Customer> users = this.customerRepository.findAll();
 
         while (petRepository.findFirstByOwnerIsNull() != null) {
             for (Customer user : users) {
